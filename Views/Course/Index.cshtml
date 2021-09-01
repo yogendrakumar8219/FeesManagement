@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ViewModel>
+@{
+    ViewBag.Title = "Course Registration List";
+}
+<font size="2">
+    <div class="card card-default">
+        <div class="card-header">LIST</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Reg. Id</th>
+                            <th>Student Name</th>
+                            <th>Gender</th>
+                            <th>Father Name</th>
+                            <th>Categery</th>
+                            <th>Course Id</th>
+                            <th>Class</th>
+                            <th>Year</th>
+                            <th>Session</th>
+                            <th>Fees</th>
+                            <th>Mobile No.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td><a asp-controller="Course" asp-action="edit" asp-route-CourseId="@item.course.CourseId" class="btn btn-primary">Edit</a></td>
+                            <td>
+                                <form method="post" asp-controller="Course" asp-action="delete" asp-route-CourseId="@item.course.CourseId">
+                                    <span id="confirmDeleteSpan_@item.course.CourseId" style="display:none">
+                                        <span>Are you sure you want to delete ?</span>
+                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.course.CourseId',false)">No</a>
+                                    </span>
+                                    <span id="deleteSpan_@item.course.CourseId">
+                                        <a href="#" class="btn btn-danger" onclick="confirmDelete('@item.course.CourseId',true)">Delete</a>
+                                    </span>
+                                </form>
+                            </td>
+                            <td>@item.course.RegId</td>
+                            <td>@item.reg.StudentName</td>
+                            <td>@item.reg.Gender</td>
+                            <td>@item.reg.FatherName</td>
+                            <td>@item.reg.Categery</td>
+                            <td>@item.course.CourseId</td>
+                            <td>@item.course.StudentClass</td>
+                            <td>@item.course.Year</td>
+                            <td>@item.course.Session</td>
+                            <td>@item.course.TotalFees</td>
+                            <td>@item.reg.MobileNumber</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</font>
+@section Scripts{
+    <script src="~/js/CustomScript.js"></script>
+}
+
+

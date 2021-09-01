@@ -1,0 +1,155 @@
+﻿@model FeesEditViewModel
+@{
+    ViewBag.Title = "Edit Fees Detail";
+
+}
+<form asp-controller="Fees" asp-action="edit" method="post" class="mt-3">
+    <input hidden asp-for="FeesId" />
+    <div class="form-group row">
+        <label asp-for="RegId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-2">
+            <input asp-for="RegId" class="form-control" placeholder="Registration Id">
+        </div>
+        <div class="col-sm-1">
+            <button type="button" id="btngetreg" name="btngetreg" class="btn btn-primary">Get</button>
+        </div>
+        <label asp-for="Categery" class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-2">
+            <input asp-for="Categery" class="form-control" disabled>
+        </div>
+
+        <label asp-for="RollNo" class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-3">
+            <input asp-for="RollNo" class="form-control" disabled>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="StudentName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-3">
+            <input asp-for="StudentName" class="form-control" disabled>
+        </div>
+        <label asp-for="Gender" class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-2">
+            <input asp-for="Gender" class="form-control" disabled>
+        </div>
+        <label asp-for="FatherName" class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-3">
+            <input asp-for="FatherName" class="form-control" disabled>
+        </div>
+    </div>
+
+    <div class="form-group row">
+
+        <label asp-for="Address" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-3">
+            <input asp-for="Address" class="form-control" disabled>
+        </div>
+
+        <label asp-for="MobileNumber" class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-2">
+            <input asp-for="MobileNumber" class="form-control" disabled>
+        </div>
+
+        <label asp-for="Email" class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-3">
+            <input asp-for="Email" class="form-control" disabled>
+        </div>
+    </div>
+
+    <div class="form-group row">
+
+        <label asp-for="CourseId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-3">
+            <select asp-for="CourseId" class="custom-select mr-sm-2" asp-items="@(new SelectList(Model.CourseIdList))">
+
+            </select>
+        </div>
+
+        <label asp-for="StudentClass" class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-2">
+            <input asp-for="StudentClass" class="form-control" disabled>
+        </div>
+
+        <label asp-for="Year" class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-3">
+            <input asp-for="Year" class="form-control" disabled>
+        </div>
+    </div>
+
+    <div class="form-group row">
+
+        <label asp-for="Session" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-3">
+            <input asp-for="Session" class="form-control" disabled>
+        </div>
+
+        <label asp-for="Tran_date" class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-2">
+            <input asp-for="Tran_date" class="form-control">
+        </div>
+
+        <label asp-for="FeesDeposit" class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-3">
+            <input asp-for="FeesDeposit" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-7">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-action="index" asp-controller="Course" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+
+    @*This script is required to display the selected file in the file upload element*@
+    @section Scripts{
+        <script type="text/javascript">
+            $(function () {
+                $('#btngetreg').click(function () {
+                    $.ajax({
+                        url: "/Course/GetReg_with_CourseId_Detail",
+                        type: "POST",
+                        data: {
+                            "RegId": $("#RegId").val()
+                        },
+                        success: function (response, status) {
+                            alert(JSON.stringify(response));
+                            //var myObj = JSON.parse(response.CourseId.length);
+                            //alert("Hello");
+                            //alert(myObj);
+                            $('#CourseId')[0].options.length = 0;
+                            for (var i = 0; i < response.CourseId.length; i++) {
+                                $('#CourseId').append('<option value="' + response.CourseId[i] + '">' + response.CourseId[i] + '</option>');
+                            }
+                            $("#Categery").val(response.Categery);
+                            $("#RollNo").val(response.RollNo);
+                            $("#StudentName").val(response.StudentName);
+                            $("#Gender").val(response.Gender);
+                            $("#FatherName").val(response.FatherName);
+                            $("#Address").val(response.Address);
+                            $("#MobileNumber").val(response.MobileNumber);
+                            $("#Email").val(response.Email);
+
+                        }
+                    });
+                });
+                $('#CourseId').on('change', function () {
+                    //alert(this.value);
+                    $.ajax({
+                        url: "/Course/Get_CourseId_Detail",
+                        type: 'POST',
+                        data: {
+                            CourseId: this.value
+                        },
+                        success: function (response, status) {
+                            $("#StudentClass").val(response.StudentClass);
+                            $("#Year").val(response.Year);
+                            $("#Session").val(response.Session);
+                            alert(status);
+                        }
+                    });
+                });
+
+            });
+        </script>
+    }
+</form>

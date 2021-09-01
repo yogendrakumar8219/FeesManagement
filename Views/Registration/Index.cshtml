@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Reg>
+@{
+    ViewBag.Title = "Registration List";
+}
+<font size="2">
+    <div class="card card-default">
+        <div class="card-header">LIST</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Registration Number</th>
+                            <th>Roll Number</th>
+                            <th>Student Name</th>
+                            <th>Gender</th>
+                            <th>Father Name</th>
+                            <th>Categery</th>
+                            <th>Address</th>
+                            <th>Mobile Number</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var reg in Model)
+                        {
+                            <tr>
+                                <td><a asp-controller="registration" asp-action="edit" asp-route-RegId="@reg.RegId" class="btn btn-primary">Edit</a></td>
+                                <td>
+                                    <form method="post" asp-controller="registration" asp-action="delete" asp-route-RegId="@reg.RegId">
+                                        <span id="confirmDeleteSpan_@reg.RegId" style="display:none">
+                                            <span>Are you sure you want to delete ?</span>
+                                            <button type="submit" class="btn btn-danger">Yes</button>
+                                            <a href="#" class="btn btn-primary" onclick="confirmDelete('@reg.RegId',false)">No</a>
+                                        </span>
+                                        <span id="deleteSpan_@reg.RegId">
+                                            <a href="#" class="btn btn-danger" onclick="confirmDelete('@reg.RegId',true)">Delete</a>
+                                        </span>
+                                    </form>
+                                </td>
+                                <td>@reg.RegId</td>
+                                <td>@reg.RollNo</td>
+                                <td class="col-sm-2">@reg.StudentName</td>
+                                <td>@reg.Gender</td>
+                                <td>@reg.FatherName</td>
+                                <td>@reg.Categery</td>
+                                <td class="col-sm-3">@reg.Address</td>
+                                <td>@reg.MobileNumber</td>
+                                <td>@reg.Email</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</font>
+@section Scripts{
+    <script src="~/js/CustomScript.js"></script>
+}
+
+

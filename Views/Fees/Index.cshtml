@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ViewModel>
+@{
+    ViewBag.Title = "Fees List";
+}
+<font size="2">
+    <div class="card card-default">
+        <div class="card-header">LIST</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Registration Number</th>
+                            <th>Roll Number</th>
+                            <th>Student Name</th>
+                            <th>Gender</th>
+                            <th>Father Name</th>
+                            <th>Categery</th>
+                            <th>Tran. Id</th>
+                            <th>Tran. Date</th>
+                            <th>Course Id</th>
+                            <th>Class</th>
+                            <th>Year</th>
+                            <th>Session</th>
+                            <th>Fees Deposit</th>
+                            <th>Mobile Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td><a asp-controller="Fees" asp-action="edit" asp-route-FeesId="@item.fees.FeesId" asp-route-RegId="@item.reg.RegId" class="btn btn-primary">Edit</a></td>
+                            <td>
+                                <form method="post" asp-controller="Fees" asp-action="delete" asp-route-FeesId="@item.fees.FeesId">
+                                    <span id="confirmDeleteSpan_@item.fees.FeesId" style="display:none">
+                                        <span>Are you sure you want to delete ?</span>
+                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.fees.FeesId',false)">No</a>
+                                    </span>
+                                    <span id="deleteSpan_@item.fees.FeesId">
+                                        <a href="#" class="btn btn-danger" onclick="confirmDelete('@item.fees.FeesId',true)">Delete</a>
+                                    </span>
+                                </form>
+                            </td>
+                            <td>@item.fees.RegId</td>
+                            <td>@item.reg.RollNo</td>
+                            <td>@item.reg.StudentName</td>
+                            <td>@item.reg.Gender</td>
+                            <td>@item.reg.FatherName</td>
+                            <td>@item.reg.Categery</td>
+                            <td>@item.fees.FeesId</td>
+                            <td>@item.fees.Tran_date</td>
+                            <td>@item.course.CourseId</td>
+                            <td>@item.course.StudentClass</td>
+                            <td>@item.course.Year</td>
+                            <td>@item.course.Session</td>
+                            <td>@item.fees.FeesDeposit</td>
+                            <td>@item.reg.MobileNumber</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</font>
+@section Scripts{
+    <script src="~/js/CustomScript.js"></script>
+}
+
+

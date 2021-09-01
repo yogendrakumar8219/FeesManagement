@@ -1,0 +1,107 @@
+﻿@model RegEditViewModel
+@{
+    ViewBag.Title = "Edit Registration";
+    var photoPath = "~/images/" + (Model.ExistingPhotPath ?? "noimage.jpg");
+}
+<form enctype="multipart/form-data" asp-controller="Registration" asp-action="edit" method="post" class="mt-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input hidden asp-for="RegId" />
+    <input hidden asp-for="ExistingPhotPath" />
+    <div class="form-group row">
+        <label asp-for="RollNo" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="RollNo" class="form-control" placeholder="Roll Number" />
+            <span asp-validation-for="RollNo" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="StudentName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="StudentName" class="form-control" placeholder="Student Name" />
+            <span asp-validation-for="StudentName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Gender" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="Gender" class="custom-select mr-sm-2" asp-items="Html.GetEnumSelectList<Genders>()">
+                <option value="">Please Select</option>
+            </select>
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="FatherName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="FatherName" class="form-control" placeholder="Father Name" />
+            <span asp-validation-for="FatherName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Categery" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="Categery" class="custom-select mr-sm-2">
+                <option value="">Please Select</option>
+                <option value="Unreserved">Unreserved</option>
+                <option value="Unreserved/MIN">Unreserved/MIN</option>
+                <option value="O.B.C">O.B.C</option>
+                <option value="O.B.C/MIN">O.B.C/MIN</option>
+                <option value="S.C">S.C</option>
+                <option value="S.T">S.T</option>
+            </select>
+            <span asp-validation-for="Categery" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Address" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Address" class="form-control" placeholder="Address" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="MobileNumber" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="MobileNumber" class="form-control" placeholder="Mobile Number" />
+            <span asp-validation-for="MobileNumber" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control" placeholder="Email Id" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <div class="custom-file">
+                <input asp-for="Photo" class="form-control custom-file-input" />
+                <label class="custom-file-label">Click here to change photo</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row col-sm-4 offset-4">
+        <img class="imageThumbnail" src="@photoPath" asp-append-version="true" />
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-action="index" asp-controller="registration" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+    @*This script is required to display the selected file in the file upload element*@
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+        </script>
+    }
+</form>

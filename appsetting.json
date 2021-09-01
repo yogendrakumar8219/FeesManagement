@@ -1,0 +1,11 @@
+{
+  "ConnectionStrings": {
+    "FeeDBConnection": "server=(LocalDB)\\MSSQLLocalDB; AttachDbFileName=F:\\C # Program\\2019\\.NET CORE\\FeeManagement\\FeeDB.mdf;Integrated Security=True"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning",
+      "Microsoft": "Warning"
+    }
+  }
+}
