@@ -7,16 +7,16 @@ namespace FeesManagement.ViewModels
 {
     public class FeesViewModel
     {
+        public string RegId { get; set; }
         public string RollNo { get; set; }
         public string StudentName { get; set; }
         public Genders? Gender { get; set; }
         public string FatherName { get; set; }
         public string Categery { get; set; }
-        public string Address { get; set; }
         public string MobileNumber { get; set; }
-        public string Email { get; set; }
-        public List<int> CourseId { get; set; }
-        public DateTime Tran_date { get; set; }
-        public decimal FeesDeposit { get; set; }
+        public decimal TotalFees { get; set; }
+        public decimal Fees_Total { get;set; }
+        public decimal Bal { get; set; }
     }
 }
+

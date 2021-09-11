@@ -1,0 +1,48 @@
+﻿@model IEnumerable<FeesViewModel>
+@{
+    ViewBag.Title = "Fees List";
+}
+<font size="2">
+    <div class="card card-default">
+        <div class="card-header">LIST</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Registration Number</th>
+                            <th>Roll Number</th>
+                            <th>Student Name</th>
+                            <th>Gender</th>
+                            <th>Father Name</th>
+                            <th>Categery</th>
+                            <th>Total Fees</th>
+                            <th>Total Deposit</th>
+                            <th>Bal. Fees</th>
+                            <th>Mobile Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.RegId</td>
+                                <td>@item.RollNo</td>
+                                <td>@item.StudentName</td>
+                                <td>@item.Gender</td>
+                                <td>@item.FatherName</td>
+                                <td>@item.Categery</td>
+                                <td>@item.TotalFees</td>
+                                <td>@item.Fees_Total</td>
+                                <td>@item.Bal</td>
+                                <td>@item.MobileNumber</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</font>
+
+

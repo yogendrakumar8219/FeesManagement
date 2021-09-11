@@ -52,7 +52,6 @@ namespace FeesManagement.Models
             return q;
         }
 
-
         public Fees GetFees(int FeesId)
         {
             return context.Feess.Find(FeesId);

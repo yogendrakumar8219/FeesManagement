@@ -3,11 +3,12 @@
 @{
     ViewBag.Title = "Select Course form";
 }
-<form  asp-controller="Course" asp-action="create" method="post" class="mt-3">
+<form asp-controller="Course" asp-action="create" method="post" class="mt-3">
     <div class="form-group row">
         <label asp-for="RegId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-2">
             <input asp-for="RegId" class="form-control" placeholder="Registration Id">
+            <span asp-validation-for="RegId" class="text-danger"></span>
         </div>
         <div class="col-sm-1">
             <button type="button" id="btngetreg" name="btngetreg" class="btn btn-primary">Get</button>
@@ -60,7 +61,7 @@
         <label asp-for="StudentClass" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-3">
             <select asp-for="StudentClass">
-                <option value="select" hidden=""></option>
+                <option value="">Please Select</option>
                 <option value="BCA">BCA</option>
                 <option value="BBA">BBA</option>
                 <option value="BFA">BFA</option>
@@ -77,25 +78,28 @@
                 <option value="M.A.[Sociology]">M.A.[Sociology]</option>
                 <option value="M.A.[Psychology]">M.A.[Psychology]</option>
             </select>
+            <span asp-validation-for="StudentClass" class="text-danger"></span>
         </div>
 
         <label asp-for="Year" class="col-sm-1 col-form-label"></label>
         <div class="col-sm-2">
             <select asp-for="Year">
-                <option value="select" hidden=""></option>
+                <option value="">Please Select</option>
                 <option value="I">I</option>
                 <option value="II">II</option>
                 <option value="III">III</option>
                 <option value="IV">IV</option>
             </select>
+            <span asp-validation-for="Year" class="text-danger"></span>
         </div>
 
         <label asp-for="Session" class="col-sm-1 col-form-label"></label>
         <div class="col-sm-3">
             <select asp-for="Session">
-                <option value="select" hidden=""></option>
+                <option value="">Please Select</option>
                 <option value="2020-21">2020-21</option>
             </select>
+            <span asp-validation-for="Session" class="text-danger"></span>
         </div>
     </div>
 
@@ -105,6 +109,7 @@
 
             <div class="col-sm-3">
                 <input asp-for="TotalFees" class="form-control" placeholder="Total Fees">
+                <span asp-validation-for="TotalFees" class="text-danger"></span>
             </div>
 
             <div class="col-sm-3">
@@ -115,9 +120,10 @@
             <label for="submit" id="m1" class="col-sm-4 col-form-label;alert alert-success"></label>
 
         </div>
-    </center>
 
-    
+    </center>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
 
     @*This script is required to display the selected file in the file upload element*@
     @section Scripts{

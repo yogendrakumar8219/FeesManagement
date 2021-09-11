@@ -19,7 +19,24 @@ namespace FeesManagement.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Seed();
+
+            //Foreign key with NO ACTION ON DELETE
+
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
+            /*
+             //The.OnDelete(DeleteBehavior.Restrict) assigns the delete Behavior to this relationship
+            modelBuilder.Entity<Course>()
+            .HasOne<Reg>(e => e.Reg)
+            .WithMany(c => c.Course)
+            .HasForeignKey(e => e.RegId)
+            .IsRequired(true)
+            .OnDelete(DeleteBehavior.Restrict);
+            */
+
           
         }
 

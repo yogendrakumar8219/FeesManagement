@@ -34,6 +34,53 @@ namespace FeesManagement.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ViewResult GetData()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult RemBalIndex(GetDataViewModel model)
+        {
+            List<Reg> regs = _context.Regs.ToList();
+            List<Course> courses = _context.Courses.ToList();
+            List<Fees> feess = _context.Feess.ToList();
+            var q = from r in regs
+                    join c in courses on r.RegId equals c.RegId
+                    join f in feess on c.CourseId equals f.CourseId
+                    where c.StudentClass==model.StudentClass && c.Year==model.Year && c.Session==model.Session
+                    group  new
+                    {
+                        r,
+                        c,
+                        f
+                    } by new
+                    {
+                        r.RegId,
+                        r.RollNo,
+                        r.StudentName,
+                        r.Gender,
+                        r.FatherName,
+                        r.Categery,
+                        r.MobileNumber,
+                        c.TotalFees,
+                    } into g
+                    select new FeesViewModel
+                    {
+
+                        RegId=g.Key.RegId,
+                        RollNo=g.Key.RollNo,
+                        StudentName=g.Key.StudentName,
+                        Gender=g.Key.Gender,
+                        FatherName=g.Key.FatherName,
+                        Categery=g.Key.Categery,
+                        MobileNumber=g.Key.MobileNumber,
+                        TotalFees=g.Key.TotalFees,
+                        Fees_Total = g.Sum(groupedThing=> groupedThing.f.FeesDeposit),
+                        Bal = g.Key.TotalFees - g.Sum(groupedThing => groupedThing.f.FeesDeposit),
+                    };
+            return View(q);
+        }
         [HttpPost]
         public IActionResult Create(FeesCreateViewModel model)
         {

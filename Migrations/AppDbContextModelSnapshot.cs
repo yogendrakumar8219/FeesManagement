@@ -78,15 +78,24 @@ namespace FeesManagement.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("RegId");
+                    b.Property<string>("RegId")
+                        .IsRequired()
+                        .HasMaxLength(30);
 
-                    b.Property<string>("Session");
+                    b.Property<string>("Session")
+                        .IsRequired()
+                        .HasMaxLength(7);
 
-                    b.Property<string>("StudentClass");
+                    b.Property<string>("StudentClass")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
-                    b.Property<decimal>("TotalFees");
+                    b.Property<decimal>("TotalFees")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Year");
+                    b.Property<string>("Year")
+                        .IsRequired()
+                        .HasMaxLength(5);
 
                     b.HasKey("CourseId");
 
@@ -103,11 +112,15 @@ namespace FeesManagement.Migrations
 
                     b.Property<int>("CourseId");
 
-                    b.Property<decimal>("FeesDeposit");
+                    b.Property<decimal>("FeesDeposit")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("RegId");
+                    b.Property<string>("RegId")
+                        .IsRequired()
+                        .HasMaxLength(30);
 
-                    b.Property<DateTime>("Tran_date");
+                    b.Property<DateTime>("Tran_date")
+                        .HasColumnType("date");
 
                     b.HasKey("FeesId");
 
@@ -120,24 +133,33 @@ namespace FeesManagement.Migrations
 
             modelBuilder.Entity("FeesManagement.Models.Reg", b =>
                 {
-                    b.Property<string>("RegId");
+                    b.Property<string>("RegId")
+                        .HasMaxLength(30);
 
-                    b.Property<string>("Address");
+                    b.Property<string>("Address")
+                        .HasMaxLength(150);
 
                     b.Property<string>("Categery")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(30);
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("FatherName");
+                    b.Property<string>("FatherName")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
-                    b.Property<int>("Gender");
+                    b.Property<int>("Gender")
+                        .HasMaxLength(10);
 
-                    b.Property<string>("MobileNumber");
+                    b.Property<string>("MobileNumber")
+                        .HasMaxLength(30);
 
                     b.Property<string>("PhotoPath");
 
-                    b.Property<string>("RollNo");
+                    b.Property<string>("RollNo")
+                        .HasMaxLength(30);
 
                     b.Property<int>("SNo")
                         .ValueGeneratedOnAdd()
@@ -150,11 +172,6 @@ namespace FeesManagement.Migrations
                     b.HasKey("RegId");
 
                     b.ToTable("Regs");
-
-                    b.HasData(
-                        new { RegId = "19G121121", Address = "House No.-227 South Bhopa Road, New Manadi Mzn", Categery = "O.B.C", Email = "yogendrakumar8219@gmail.com", FatherName = "Yogendra Kumar", Gender = 1, MobileNumber = "9897505503", PhotoPath = "", RollNo = "101", SNo = 1, StudentName = "Pakhi" },
-                        new { RegId = "18G121121", Address = "House No.-227 South Bhopa Road, New Manadi Mzn", Categery = "O.B.C", Email = "sanjaykumar@gmail.com", FatherName = "Sanjay Kumar", Gender = 0, MobileNumber = "9897653676", PhotoPath = "", RollNo = "102", SNo = 2, StudentName = "Manu" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -271,7 +288,8 @@ namespace FeesManagement.Migrations
                 {
                     b.HasOne("FeesManagement.Models.Reg", "Reg")
                         .WithMany("Course")
-                        .HasForeignKey("RegId");
+                        .HasForeignKey("RegId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("FeesManagement.Models.Fees", b =>
@@ -279,11 +297,12 @@ namespace FeesManagement.Migrations
                     b.HasOne("FeesManagement.Models.Course", "Course")
                         .WithMany("Fees")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("FeesManagement.Models.Reg", "Reg")
                         .WithMany("Fees")
-                        .HasForeignKey("RegId");
+                        .HasForeignKey("RegId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -291,7 +310,7 @@ namespace FeesManagement.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -299,7 +318,7 @@ namespace FeesManagement.Migrations
                     b.HasOne("FeesManagement.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -307,7 +326,7 @@ namespace FeesManagement.Migrations
                     b.HasOne("FeesManagement.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -315,12 +334,12 @@ namespace FeesManagement.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("FeesManagement.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -328,7 +347,7 @@ namespace FeesManagement.Migrations
                     b.HasOne("FeesManagement.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }
