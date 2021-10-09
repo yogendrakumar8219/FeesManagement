@@ -150,8 +150,7 @@ namespace FeesManagement.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int>("Gender")
-                        .HasMaxLength(10);
+                    b.Property<int?>("Gender");
 
                     b.Property<string>("MobileNumber")
                         .HasMaxLength(30);

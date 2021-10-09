@@ -78,7 +78,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral(" cannot be found\r\n    </h5>\r\n</div>\r\n");
             EndContext();
             BeginContext(230, 157, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "04e8313071b241e99cc1433c227c3215", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1ba82b4a89a841fcb193560bc0c71eba", async() => {
                 BeginContext(333, 50, true);
                 WriteLiteral("\r\n    Click here to see the list of all students\r\n");
                 EndContext();

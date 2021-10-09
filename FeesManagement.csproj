@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20210903093256_Alterran_date2.cs" />
-    <Compile Remove="Migrations\20210903093256_Alterran_date2.Designer.cs" />
-    <Compile Remove="Migrations\20210905152859_InitalCreate.cs" />
-    <Compile Remove="Migrations\20210905152859_InitalCreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

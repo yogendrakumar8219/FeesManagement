@@ -21,7 +21,6 @@ namespace FeesManagement.ViewModels
         [Required(ErrorMessage = "Please provide a value for Student Name field"), MaxLength(50, ErrorMessage = "Name cannot exceed 50 character")]
         public string StudentName { get; set; }
 
-        [Required(ErrorMessage = "Please provide a value for Gender field"), MaxLength(10, ErrorMessage = "Gender cannot exceed 10 character")]
         public Genders? Gender { get; set; }
 
         [Required(ErrorMessage = "Please provide a value for Father Name field"), MaxLength(50, ErrorMessage = "Father Name cannot exceed 50 character")]

@@ -15,13 +15,19 @@ namespace FeesManagement.Controllers
 {
     public class RegistrationController : Controller
     {
+        private readonly IFeesRepository _feesRepository;
+        private readonly ICourseRepository _courseRepository;
         private readonly IRegRepository _regRepository;
         private readonly IHostingEnvironment hostingEnvironment;
-        
-        public RegistrationController(IRegRepository regRepository, IHostingEnvironment hostingEnvironment)
+        private readonly AppDbContext _context;
+
+        public RegistrationController(IFeesRepository feesRepository, IRegRepository regRepository, ICourseRepository courseRepository, IHostingEnvironment hostingEnvironment, AppDbContext context)
         {
             _regRepository = regRepository;
+            _courseRepository = courseRepository;
+            _feesRepository = feesRepository;
             this.hostingEnvironment = hostingEnvironment;
+            _context = context;
         }
         [HttpPost]
         public JsonResult GetRegDetail(string RegId)
@@ -148,18 +154,71 @@ namespace FeesManagement.Controllers
         public IActionResult Delete(string RegId)
         {
             Reg reg = _regRepository.GetReg(RegId.ToString());
+
+            List<Fees> fees = _context.Feess.ToList();
+            var _f = from f in fees
+                    where f.RegId == RegId
+                    select f;
+
+            if (_f.Count() > 0)
+            {
+                int id = 0;
+                Response.StatusCode = 404;
+                foreach (var t in _f)
+                {
+                    id = t.FeesId;
+                }
+                ViewBag.ErrorTitle = "Registration Id is used";
+                ViewBag.ErrorMessage = "The Reg Id  " + RegId + " is used in Fees " + id;
+                return View("Error", id);
+            }
+
+
+
+            List<Course> courses = _context.Courses.ToList();
+            var q = from c in courses
+                    where c.RegId == RegId
+                    select c;
+            
+            if(q.Count()>0)
+            {
+                int id=0;
+                Response.StatusCode = 404;
+                foreach (var t in q)
+                {
+                    id = t.CourseId;
+                }
+                ViewBag.ErrorTitle = "Registration Id is used";
+                ViewBag.ErrorMessage = "The Reg Id  "+RegId+" is used in Course "+id;
+                return View("Error", id);
+            }
+
             if (reg == null)
             {
                 Response.StatusCode = 404;
-                return View("RegNotFound", RegId.ToString());
+                return View("RegistrationNotFound", RegId.ToString());
             }
-            if (reg.PhotoPath != null)
+            else
             {
-                 string filePath = Path.Combine(hostingEnvironment.WebRootPath, "images", reg.PhotoPath);
-                 System.IO.File.Delete(filePath);
+                try
+                {
+                    Reg deleteReg = _regRepository.Delete(reg.RegId);
+                    if (reg.PhotoPath != null)
+                    {
+                        string filePath = Path.Combine(hostingEnvironment.WebRootPath, "images", reg.PhotoPath);
+                        System.IO.File.Delete(filePath);
+                    }
+
+                    return RedirectToAction("index");
+                }
+                catch(Exception ex)
+                {
+
+                }
+                
             }
-            Reg deleteReg = _regRepository.Delete(reg.RegId);
-            return RedirectToAction("index");
+            return View("");
+            
         }
     }
 }

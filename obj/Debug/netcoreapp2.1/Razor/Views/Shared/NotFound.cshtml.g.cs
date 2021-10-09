@@ -76,7 +76,7 @@ Write(ViewBag.ErrorMessage);
             WriteLiteral("</h1>\r\n");
             EndContext();
             BeginContext(73, 95, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "df1a5ca9c7ae4273a2fbe48f1acd77a5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9d8a20cbb36a49c3817397747312ed55", async() => {
                 BeginContext(125, 39, true);
                 WriteLiteral("Click here to navigate to the home page");
                 EndContext();

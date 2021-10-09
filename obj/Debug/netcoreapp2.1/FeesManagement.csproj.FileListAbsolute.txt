@@ -7,6 +7,7 @@ F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\bin\Debug\netcoreapp
 F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\bin\Debug\netcoreapp2.1\FeesManagement.pdb
 F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\bin\Debug\netcoreapp2.1\FeesManagement.Views.dll
 F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\bin\Debug\netcoreapp2.1\FeesManagement.Views.pdb
+F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\obj\Debug\netcoreapp2.1\FeesManagement.GeneratedMSBuildEditorConfig.editorconfig
 F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\obj\Debug\netcoreapp2.1\FeesManagement.AssemblyInfoInputs.cache
 F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\obj\Debug\netcoreapp2.1\FeesManagement.AssemblyInfo.cs
 F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\obj\Debug\netcoreapp2.1\FeesManagement.csproj.CoreCompileInputs.cache
@@ -41,4 +42,4 @@ F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\obj\Debug\netcoreapp
 F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\obj\Debug\netcoreapp2.1\FeesManagement.pdb
 F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\obj\Debug\netcoreapp2.1\FeesManagement.genruntimeconfig.cache
 F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\obj\Debug\netcoreapp2.1\FeesManagement.csproj.CopyComplete
-F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\obj\Debug\netcoreapp2.1\FeesManagement.csprojAssemblyReference.cache
+F:\C # Program\2019\.NET CORE\FeesManagement\FeesManagement\obj\Debug\netcoreapp2.1\FeesManagement.csproj.AssemblyReference.cache
